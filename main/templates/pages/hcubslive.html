@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static%}
+	<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<title>hcubslive Management System</title>
+	
+</head>
+<script type="text/javascript">
+	
+$(document).ready(function(){
+
+	$("#search_feeds").click(function(){
+
+		$("#append").append('<div style="width:100%; border:0px solid #000;background-color:#fff"; id="main"><div style="width:100%;background-color:#3062a5;height:30px;color:#fff;font-weight:bold;"><div style="float:right; border:1px solid #fff;border-radius:12px;width:30px;height:20px;font-weight:bold" align="center">X</div><div style="float:left;color:#fff;font-weight:bold">Search_001</div></div><br/><select id="criteria"><option>Surname</option><option>customer_id</option></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="searchitem"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Search" id="search"/><br/><hr/><form method="POST" id="form" disabled="disabled"><fieldset><legend>Customer Details</legend><input type="text" id="lname" placeholder="Last  Name"/>&nbsp;&nbsp;&nbsp;<input type="text" id="fname" placeholder="FirstName"/> <select id="sex" placeholder="sex"><option>Sex..</option><option>Male</option><option>Female</option></select>&nbsp;&nbsp;<textarea id="address" placeholde="Address"></textarea>&nbsp;&nbsp;&nbsp;<select id="zone" ><option>The Zone</option><option>NORTH</option><option>WEST</option><option>EAST</option><option>SOUTH</option></select>&nbsp;&nbsp;&nbsp;<select id="state"><option>Select the State........</option><option>ABIA</option><option>ADAMAWA</option><option>AKWA-IBOM</option><option>ANABRWA</option><option>BAUCHI</option><option>BORNO</option><option>CROSS-RIVER</option><option>DELTA</option><option>EDO</option><option>ENUGU</option><option>IMO</option><option>KOGI</option><option>KWARA</option><option>LAGOS</option><option>NIGER</option><option>OYO</option><option>OSUN</option><option>ONDO</option><option>PORT-HARCOURT</option></select><br/><br/><select id="country_type"><option>CountryType...</option><option>NIGERIAN</option><option>NON-NIGERIAN</option></select>&nbsp;&nbsp;&nbsp;<input type="text" id="mobile" placeholder="Tel..Number"/>&nbsp;&nbsp;&nbsp;<input type="text" id="pob" placeholder="Date of Birth...DD/MM/YY"/>&nbsp;&nbsp;&nbsp;<input type="text" id="dob" placeholder="Place of Birth"/>&nbsp;&nbsp;&nbsp;<input type="text" id="lga" placeholder="Local Government Area"/><br/><br/><select id="plan"><option>Plan Type...</option><option>INDIVIDUAL</option><option>COUPLE</option><option>FAMILY</option></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="list"></textarea>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="receiptnumber" id="receiptnumber"/>&nbsp;&nbsp;&nbsp;&nbsp;<select id="payment_type"><option>PaymentType</option><option>PARTPAYMENT</option><option>FULLPAYMENT</option></select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="amount" placeholder="Amount Paid..."/></fieldset><br/><br/></form><div style="width:200px;height:50px;background-color:#3062a5;cursor:pointer;color:#fff;font-weight:bold;float:left;margin-left:40%" align="center" id="update"><br/>Update</div></div>')
+
+			
+	})
+
+	$("#create_new").click(function(){
+
+		$("#append").append('<div style="width:100%; border:0px solid #000;"; id="main"><div style="width:100%;background-color:#3062a5;height:30px;color:#fff;font-weight:bold;"><div style="float:right; border:1px solid #fff;border-radius:12px;width:30px;height:20px;font-weight:bold" align="center">X</div><div style="float:left;color:#fff;font-weight:bold">Create_New</div></div><form method="POST"><fieldset><legend>Personal Details</legend><input type="text" id="lname" placeholder="Last  Name"/>&nbsp;&nbsp;&nbsp;<input type="text" id="fname" placeholder="FirstName"/> <select id="sex" placeholder="sex"><option>Sex..</option><option>Male</option><option>Female</option></select>&nbsp;&nbsp;<textarea id="address" placeholde="Address"></textarea>&nbsp;&nbsp;&nbsp;<select id="zone" ><option>The Zone</option><option>NORTH</option><option>WEST</option><option>EAST</option><option>SOUTH</option></select>&nbsp;&nbsp;&nbsp;<select id="state"><option>Select the State........</option><option>ABIA</option><option>ADAMAWA</option><option>AKWA-IBOM</option><option>ANABRWA</option><option>BAUCHI</option><option>BORNO</option><option>CROSS-RIVER</option><option>DELTA</option><option>EDO</option><option>ENUGU</option><option>IMO</option><option>KOGI</option><option>KWARA</option><option>LAGOS</option><option>NIGER</option><option>OYO</option><option>OSUN</option><option>ONDO</option><option>PORT-HARCOURT</option></select><br/><br/><select id="country_type"><option>CountryType...</option><option>NIGERIAN</option><option>NON-NIGERIAN</option></select>&nbsp;&nbsp;&nbsp;<input type="text" id="mobile" placeholder="Tel..Number"/>&nbsp;&nbsp;&nbsp;<input type="text" id="pob" placeholder="Date of Birth...DD/MM/YY"/>&nbsp;&nbsp;&nbsp;<input type="text" id="dob" placeholder="Place of Birth"/>&nbsp;&nbsp;&nbsp;<input type="text" id="lga" placeholder="Local Government Area"/></fieldset><br/><br/><fieldset><legend>Hospital Plan Details</legend><select id="plan"><option>Plan Type...</option><option>INDIVIDUAL</option><option>COUPLE</option><option>FAMILY</option></select><br/><br/><textarea id="list"></textarea></fieldset><br/><fieldset><legend>Payment Details</legend><input type="text" placeholder="receiptnumber" id="receiptnumber"/><br/><br/><select id="payment_type"><option>PaymentType</option><option>PARTPAYMENT</option><option>FULLPAYMENT</option></select><br/><br/><input type="text" id="amount" placeholder="Amount Paid..."/></fieldset><br/><br/></form><div style="width:200px;height:50px;background-color:#3062a5;cursor:pointer;color:#fff;font-weight:bold;float:left;margin-left:30%" align="center" id="save"><br/>Save</div><div style="width:200px;height:50px;float:left;background-color:#3062a5;color:#fff; margin-left:30px" align="center"><br/>Reset</div></div>')
+		$("#create_new").unbind();
+		$("#save").click(function(){
+
+lname = document.getElementById('lname').value;
+fname = document.getElementById('fname').value;
+sex= document.getElementById('sex').value;
+address = $("#address").val();
+zone=	document.getElementById('zone').value;
+state =	document.getElementById('state').value;
+country = document.getElementById('country_type').value;
+mobile = document.getElementById('mobile').value;
+dob = document.getElementById('dob').value;
+pob = document.getElementById('pob').value;
+lga = document.getElementById('lga').value;
+plan = document.getElementById('plan').value;
+receiptnumber = document.getElementById('receiptnumber').value;
+payment = document.getElementById('payment_type').value;
+
+amount = document.getElementById('amount').value;
+staffid= document.getElementById('staffid').value;
+
+token_x = document.getElementById('token_x').value;
+
+
+if(lname==""){
+	$("#lname").css('border','1px solid red')
+}
+else{
+	$("#lname").css('border','1px solid #000')
+}
+
+if(fname==""){
+	$("#fname").css('border','1px solid red')
+}
+else{
+	$("#fname").css('border','1px solid #000')
+}
+
+
+			
+if(address ==""){
+	$("#address").css('border','1px solid red')
+}
+else{
+	$("#address").css('border','1px solid #000')
+}
+
+if(mobile ==""){
+	$("#mobile").css('border','1px solid red')
+}
+else{
+	$("#mobile").css('border','1px solid #000')
+}
+if(dob ==""){
+	$("#dob").css('border','1px solid red')
+}
+else{
+	$("#dob").css('border','1px solid #000')
+}
+if(pob ==""){
+	$("#pob").css('border','1px solid red')
+}
+else{
+	$("#pob").css('border','1px solid #000')
+}
+if(lga ==""){
+	$("#lga").css('border','1px solid red')
+}
+else{
+	$("#lga").css('border','1px solid #000')
+}
+if(receiptnumber ==""){
+	$("#receiptnumber").css('border','1px solid red')
+}
+else{
+	$("#receiptnumber").css('border','1px solid #000')
+}
+if(amount ==""){
+	$("#amount").css('border','1px solid red')
+}		
+else{
+	$("#amount").css('border','1px solid #000')
+}
+
+if(lname==""||fname==""|| address==""|| mobile==""|| dob==""||pob==""||lga==""||receiptnumber==""|| amount==""){
+
+}else{
+	
+
+	$.ajax({
+
+		type:'POST',
+		url:'/HCUBS/createnewuserdetails/',
+		data:{
+			fname:fname,
+			lname:lname,
+			sex:sex,
+			address:address,
+			zone:zone,
+			state:state,
+			country:country,
+			mobile:mobile,
+			dob:dob,
+			pob:pob,
+			lga:lga,
+			plan:plan,
+			receiptnumber:receiptnumber,
+			payment:payment,
+			amount:amount,
+			staffid:staffid,
+			csrfmiddlewaretoken:token_x
+
+
+		},
+		
+		success:function(data){
+			alert(data);
+			if(data =="Record Successfully Saved"){
+				
+document.getElementById('lname').value=""
+ document.getElementById('fname').value=""
+ document.getElementById('sex').value=""
+  $("#address").val(" ");
+	document.getElementById('zone').value=""
+	document.getElementById('state').value=""
+ document.getElementById('country_type').value=""
+ document.getElementById('mobile').value=""
+ document.getElementById('dob').value=""
+ document.getElementById('pob').value=""
+ document.getElementById('lga').value=""
+ document.getElementById('plan').value=""
+ document.getElementById('receiptnumber').value=""
+ document.getElementById('payment_type').value=""
+ document.getElementById('amount').value=""
+			}
+			
+		},
+		error:function(error){
+			alert(error)
+		}
+
+	})
+}
+
+
+		})
+
+	})
+
+	$("#Add").click(function(){
+
+		alert('add')
+	})
+})
+
+
+</script>
+<body>
+
+	<div id="append" style="position: absolute;z-index: 2;width: 963px; height: auto;border:0px solid #000;margin-left: 22%;margin-top: 4%;" >
+		
+
+
+
+	</div>
+	
+	<div id="main" style="width: 100%; height: 100%"><input type="hidden" id="staffid" value="{{username}}">
+		<div style="width: 100%; height: 30px; background-color: #3063A5"><h1 style="font-size: 1em;color:#fff"><div style="float: right; font-weight: bold; margin-right: 10px">{{ fullname}}</div><div style="float: left;">HCUBS Management System</h1></div></div>
+		<div id="menubar" style="height:800px;width:20%;float: left;background-color: #282828;color:#fff; margin-right: 20px">
+
+
+	<img src="{% static 'images/pname.png'%}" width="90px" style="margin-left: 80px;margin-top: 10px;background-color: #fff;" /><br/>
+	<div style="color:#fff;margin-left:39%"><span style='color:#3063a5;font-weight: bold;'>StaffID</span> <br/><span>{{username}}<span>
+		<br/><br/>
+		<span style='color:#3063a5;font-weight: bold;'>Staff_Grade</span><br/>
+
+		{{grade}}<br/>
+
+		
+
+	</div>
+	
+<table style="width: 100%;float: left" border="1px">
+			<tr>
+				<td>ShortCut Apps <input type="hidden"  name="csrf_token" value="pnEBqi8lTCzQCtUVT7Kmsryl3PRHKS5Q" id="token_x"/></td>
+
+			</tr>
+			<tr>
+				<td id="create_new" style="cursor: pointer;">Create_New</td>
+				
+			</tr>
+			<tr>
+				<td id="search_feeds" style="cursor: pointer;">Search_Feeds</td>
+				
+			</tr>
+			<tr>
+				<td id="update_infor" style="cursor: pointer;">Update_INfor</td>
+				
+			</tr>
+			<tr>
+				<td>Manage</td>
+				
+			</tr>
+			<tr>
+				<td>Manage</td>
+				
+			</tr>
+				<tr>
+				<td id="attend_cust001" style="cursor: pointer;">Attend_cus001</td>
+				
+			</tr>
+
+
+			</table>
+
+
+		</div>
+		<div style="width: 100%;height: 100px" align="center"><img src="{% static 'images/logo3.jpeg'%}" width="50%" /></div>
+
+</body>
+</html>

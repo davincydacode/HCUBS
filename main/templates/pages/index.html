@@ -1,0 +1,105 @@
+<html>
+<head>
+	
+	<title>HCUBS </title>
+	{% load static %}
+	<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+
+</head>
+<script type="text/javascript">
+	
+$(document).ready(function(){
+
+	//alert('Red');
+
+	$("#createuser").click(function(){
+
+		window.location='/HCUBS/create-new-user/'
+	})
+
+	$('#login').click(function(){
+		event.preventDefault();
+		x = document.getElementById('username').value;
+		y = document.getElementById('password').value;
+		if(x== ""|| y==""){
+
+			alert('ALL FIELDS ARE MANDATORY')
+		}
+		else{
+
+
+	$.ajax({
+
+		type:'POST',
+		url:'/HCUBS/checklogin/',
+		data:{
+			username:x,
+			password:y,
+			csrfmiddlewaretoken:'{{ csrf_token }}'
+		},
+		success:function(data){
+			if(data =="ok"){
+				window.location='/HCUBS/hcubslive.fll/qH7dVijk9AE8cdWn/'
+			}
+			else{
+				alert('Invalid Username/Password')
+			}
+
+		},
+		error:function(error){
+			alert(error)
+		}
+
+	})
+}
+
+//	if(x == 'Admin' && y == 'Admin'){
+//
+//		alert(x+y);
+//		window.location='/HCUBS/hcubslive.fl/qH7dVijk9AE8cdWn/'
+//	}
+//	else{
+//		alert('Error')
+//	}
+
+	})
+});
+
+</script>
+<body>
+	
+	<div style='width:100%; height: 130px; background-color:#fff' align="CENTER">
+<p>&nbsp;</p>
+<img src="{% static 'images/logo3.jpeg' %}" width="100px" height="80px"  style="float: left; margin-left: 20px" />
+<span style="color:#500000;font-size: 2em;font-weight: bold">HCUBS<br/> Information Management System</span><br/>
+
+<hr/>
+
+<p>&nbsp;</p>
+<span style="font-size: 1em;font-weight: bold;cursor: pointer;" id="createuser"><u>Create A New User</u></span>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<form>
+	{% csrf_token %}
+<fieldset style="width: 50%">
+	<legend >Staff Login Details</legend>
+
+<input type="text" id="username" placeholder="Enter your StaffId"><br/><br/>
+<input type="password" id="password" placeholder="Enter your Password"><br/><br/>
+
+<input type="submit" value="Login" id="login"/>
+
+
+
+
+
+
+</fieldset>
+</form>
+
+
+	</div>
+</body>
+</html>

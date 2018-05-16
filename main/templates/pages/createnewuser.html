@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<title>Hcubslive</title>
+	
+</head>
+<script type="text/javascript">
+$(document).ready(function(){
+
+$("#register").click(function(){
+	event.preventDefault();
+	fname = document.getElementById('fname').value
+	lname = document.getElementById('lname').value
+	sex = document.getElementById('sex').value
+	mobile = document.getElementById('mobilenumber').value
+	staffid = document.getElementById('staffId').value
+	password = document.getElementById('password').value
+	grade = document.getElementById('grade').value
+if(lname== "" || fname=="" || sex=="" || mobile=="" || staffid==""|| password=="" || grade==""){
+	alert('All Fields are Mandatory');
+}
+else{
+
+
+$.ajax({
+
+	type:'POST',
+	url:'/HCUBS/saveform/',
+	data:{
+		fname:fname,
+		lname:lname,
+		sex:sex,
+		mobile:mobile,
+		grade:grade,
+		staffid:staffid,
+		password:password,
+		csrfmiddlewaretoken:'{{ csrf_token }}'
+	},
+	success:function(data){
+		alert(data);
+
+		if(data =="Staff Successfully Created..Kindly login Now"){
+
+			window.location='/HCUBS/'
+		}
+	},
+	error:function(error){
+
+		alert(error);
+	}
+
+})
+
+}
+
+})
+
+
+})	
+
+
+
+</script>
+<body>
+<h1>Create new Staff</h1>
+<form method="POST">
+{% csrf_token %}
+	<fieldset>
+		
+<legend>Create New Staff</legend>
+
+<input type="text" id="fname" placeholder="Enter your Staff_fname"><br/><br/>
+<input type="text" id="lname" placeholder="Enter your Staff_lname"><br/><br/>
+<input type="text" id="sex" placeholder="Enter your Staff_sex"><br/><br/>
+<input type="text" id="mobilenumber" placeholder="Enter your Staff_mobile"><br/><br/>
+<select id="grade">
+<option id='Nurse'>Nurse</option>
+<option id= 'Doctor'>Doctor</option>
+<option id='Pharmacist'>Pharmacist</option>	
+
+
+</select><br/><br/>
+<input type="text" id="staffId" placeholder="Enter your StaffId"><br/><br/>
+<input type="password" id="password" placeholder="Enter your Password"><br/><br/>
+
+<input type="submit" value="Submit" id='register'><br/><br/>
+
+
+
+	</fieldset>
+
+</form>
+
+</body>
+</html>
